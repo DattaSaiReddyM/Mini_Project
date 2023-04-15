@@ -51,6 +51,9 @@
               </div>
             </div>
           </nav>
+          {% for user in users %}
+          <h1>Welcome {{ user.password}}</h1>
+          {% endfor %}  
 	<div class="container">
 		<div class="section">
 			<h2>Water Management</h2>
