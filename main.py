@@ -46,9 +46,13 @@ def signup():
 def profile():
     return  render_template('profile.html')
 
-@app.route("/faq")
+@app.route("/faq",methods=["GET","POST"])
 def faq():
-    return  render_template('faq.html')
+    if request.method == 'GET':
+        return  render_template('faq.html')
+    if request.method == 'POST':
+        user = FAQ.query.all()
+        return  render_template('faq.html')
 
 @app.route("/forms",methods=["GET","POST"])
 def forms():
