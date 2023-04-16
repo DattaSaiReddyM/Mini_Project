@@ -52,6 +52,8 @@ def faq():
         return  render_template('faq.html')
     if request.method == 'POST':
         user = FAQ.query.all()
+        db.session.add(FAQ)
+        db.session.commit()
         return  render_template('faq.html')
 
 @app.route("/forms",methods=["GET","POST"])
