@@ -13,8 +13,7 @@ with app.app_context():
 @app.route("/")
 def home():
     users =  User.query.all()
-    print(users)
-    return  render_template('dashboard.html', users=users)
+    return  render_template('dashboard.html')
 
 @app.route("/login",methods=["GET","POST"])
 def login():
@@ -22,8 +21,8 @@ def login():
         return  render_template('login.html')
     if request.method == 'POST':
         email = request.form["email"]
-        user =  User.query.filter_by(email = email).first()
-        print(user.email)
+        faq =  User.query.filter_by(email = email).first()
+        print(faq.email)
         return redirect(url_for('home'))
         
     
@@ -33,11 +32,11 @@ def signup():
     if request.method == 'GET':
         return  render_template('signup.html')
     if request.method == 'POST':
-        user = User(
+        faq = User(
             email=request.form["email"],
             password=request.form["password"],
         )
-        db.session.add(user)
+        db.session.add(faq)
         db.session.commit()
         return redirect(url_for('login'))
    
@@ -49,12 +48,11 @@ def profile():
 @app.route("/faq",methods=["GET","POST"])
 def faq():
     if request.method == 'GET':
-        return  render_template('faq.html')
-    if request.method == 'POST':
-        user = FAQ.query.all()
-        db.session.add(FAQ)
-        db.session.commit()
-        return  render_template('faq.html')
+        
+        faq = FAQ.query.all()
+    
+    
+        return  render_template('faq.html',faq=faq)
 
 @app.route("/forms",methods=["GET","POST"])
 def forms():
