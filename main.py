@@ -45,6 +45,11 @@ def signup():
 def profile():
     return  render_template('profile.html')
 
+
+@app.route("/ce")
+def ce():
+    return  render_template('costestimation.html')
+
 @app.route("/faq",methods=["GET","POST"])
 def faq():
     if request.method == 'GET':
