@@ -53,6 +53,10 @@ def faq():
     
     
         return  render_template('faq.html',faq=faq)
+    
+@app.route("/crop", methods=["GET"]) 
+def crop():
+    return render_template('Crop.html')
 
 @app.route("/forms",methods=["GET","POST"])
 def forms():
