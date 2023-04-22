@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, jsonify, url_for
 from model import *
 import os
+import numpy as np
+import pickle
 
 app = Flask(__name__)
+model = pickle.load(open('model.pkl', 'rb'))
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///"+os.path.join(os.path.abspath(os.path.dirname(__file__)),"database.sqlite3")
 db.init_app(app)
 with app.app_context():
@@ -44,6 +47,34 @@ def signup():
 @app.route("/profile")
 def profile():
     return  render_template('profile.html')
+
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
+@app.route('/predict',methods=['POST'])
+def predict():
+    '''
+    For rendering results on HTML GUI
+    '''
+    int_features = [int(x) for x in request.form.values()]
+    final_features = [np.array(int_features)]
+    prediction = model.predict(final_features)
+    
+    output = prediction
+
+    return render_template('index.html', prediction_text='Suggested crop for given soil health condition is: "{}".'.format(output[0]))
+
+@app.route('/predict_api',methods=['POST'])
+def predict_api():
+    '''
+    For direct API calls trought request
+    '''
+    data = request.get_json(force=True)
+    prediction = model.predict([np.array(list(data.values()))])
+
+    output = prediction[0]
+    return jsonify(output)
 
 
 @app.route("/ce")
