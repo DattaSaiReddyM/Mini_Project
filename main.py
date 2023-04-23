@@ -81,7 +81,7 @@ def predict_api():
 def ce():
     return  render_template('costestimation.html')
 
-@app.route("/cc", methods=["GET"] )
+@app.route("/cc")
 def cc():
     return  render_template('cropcomparison.html')
 
