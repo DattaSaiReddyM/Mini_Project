@@ -29,7 +29,7 @@ var product = [{
 }, {
     "id": 4,
     "title": "Chilles",
-    "price": "400 per 10gm",
+    "price": "124/kg",
     "description": "The crop starts yielding green chillies 2 months after transplanting and dry chillies 90 days after transplanting. The crop lasts for 5-6 months after transplanting depending upon duration of the variety. Four to five picking of green chillies or two to three picking of red ripe chillies is done.",
     "brand": "An ideal soil for chilli is light loam and sandy soil which is rich in lime and organic matters. Chilli can be successfully grown in soils with soil pH of 6-7.",
     "image": "https://agritech.tnau.ac.in/crop_protection/chilli.jpg"

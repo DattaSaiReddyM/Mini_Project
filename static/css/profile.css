@@ -3,11 +3,12 @@
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	font-family: Arial, sans-serif;
 	background-color:;
-	background-image: url('https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80');
+	background-image: url('https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638892233/EducationHub/photos/crops-growing-in-thailand.jpg');
+	height:100%;
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:cover; 
 	color: #333;
 }
 
