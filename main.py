@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify, url_for
+# from ML_model import *
 from model import *
 import os
 import numpy as np
@@ -48,42 +49,40 @@ def signup():
 def profile():
     return  render_template('profile.html')
 
-@app.route('/index')
-def index():
-    return render_template('index.html')
+# @app.route('/index')
+# def index():
+#     return render_template('index.html')
 
-@app.route('/predict',methods=['POST'])
-def predict():
-    '''
-    For rendering results on HTML GUI
-    '''
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
+# @app.route('/SoilTypeAnalysis',methods=['POST'])
+# def predict():
+#     int_features = [int(x) for x in request.form.values()]
+#     final_features = [np.array(int_features)]
+#     prediction = model.predict(final_features)
     
-    output = prediction
+#     output = prediction
 
-    return render_template('index.html', prediction_text='Suggested crop for given soil health condition is: "{}".'.format(output[0]))
+#     return render_template('SoilTypeAnalysis.html', prediction_text='Suggested crop for given soil health condition is: "{}".'.format(output[0]))
 
-@app.route('/predict_api',methods=['POST'])
-def predict_api():
-    '''
-    For direct API calls trought request
-    '''
-    data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
+# @app.route('/predict_api',methods=['POST'])
+# def predict_api():
+#     '''
+#     For direct API calls trought request
+#     '''
+#     data = request.get_json(force=True)
+#     prediction = model.predict([np.array(list(data.values()))])
 
-    output = prediction[0]
-    return jsonify(output)
+#     output = prediction[0]
+#     return jsonify(output)
 
 
-@app.route("/ce")
-def ce():
-    return  render_template('costestimation.html')
+@app.route("/crop_estimation")
+def crop_estimation():
+    print("hello")
+    return render_template('./Features/crop_estimation.html')
 
-@app.route("/cc")
-def cc():
-    return  render_template('cropcomparison.html')
+@app.route("/crop_comparison")
+def crop_comparison():
+    return render_template('./Features/crop_comparison.html')
 
 
 
@@ -96,9 +95,10 @@ def faq():
     
         return  render_template('faq.html',faq=faq)
     
-@app.route("/crop", methods=["GET"]) 
-def crop():
-    return render_template('Crop.html')
+@app.route("/crop_information", methods=["GET"]) 
+def crop_information():
+    return render_template('./Features/crop_information.html')
+
 
 @app.route("/forms",methods=["GET","POST"])
 def forms():
