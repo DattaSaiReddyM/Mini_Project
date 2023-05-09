@@ -1,8 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, jsonify, url_for
+# from ML_model import *
 from model import *
 import os
+import numpy as np
+import pickle
 
 app = Flask(__name__)
+model = pickle.load(open('model.pkl', 'rb'))
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///"+os.path.join(os.path.abspath(os.path.dirname(__file__)),"database.sqlite3")
 db.init_app(app)
 with app.app_context():
@@ -45,10 +49,42 @@ def signup():
 def profile():
     return  render_template('profile.html')
 
+# @app.route('/index')
+# def index():
+#     return render_template('index.html')
 
-@app.route("/ce")
-def ce():
-    return  render_template('costestimation.html')
+# @app.route('/SoilTypeAnalysis',methods=['POST'])
+# def predict():
+#     int_features = [int(x) for x in request.form.values()]
+#     final_features = [np.array(int_features)]
+#     prediction = model.predict(final_features)
+    
+#     output = prediction
+
+#     return render_template('SoilTypeAnalysis.html', prediction_text='Suggested crop for given soil health condition is: "{}".'.format(output[0]))
+
+# @app.route('/predict_api',methods=['POST'])
+# def predict_api():
+#     '''
+#     For direct API calls trought request
+#     '''
+#     data = request.get_json(force=True)
+#     prediction = model.predict([np.array(list(data.values()))])
+
+#     output = prediction[0]
+#     return jsonify(output)
+
+
+@app.route("/crop_estimation")
+def crop_estimation():
+    print("hello")
+    return render_template('./Features/crop_estimation.html')
+
+@app.route("/crop_comparison")
+def crop_comparison():
+    return render_template('./Features/crop_comparison.html')
+
+
 
 @app.route("/faq",methods=["GET","POST"])
 def faq():
@@ -58,6 +94,11 @@ def faq():
     
     
         return  render_template('faq.html',faq=faq)
+    
+@app.route("/crop_information", methods=["GET"]) 
+def crop_information():
+    return render_template('./Features/crop_information.html')
+
 
 @app.route("/forms",methods=["GET","POST"])
 def forms():
