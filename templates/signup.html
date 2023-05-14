@@ -71,9 +71,9 @@
         var password = document.forms["signup"]["password"].value;
         var location = document.forms["signup"]["location"].value;
         var season = document.forms["signup"]["season"].value;
-        var demand = document.forms["signup"]["demand"].value;
+        var phno = document.forms["signup"]["phno"].value;
         
-        if (name == "" || email == "" || password == "" || location == "" || season == "" || demand == "") {
+        if (name == "" || email == "" || password == "" || location == "" || season == "" || phno == "") {
           alert("All fields are required.");
           return false;
         }
@@ -95,6 +95,7 @@
     </script>
   </head>
   <body>
+    {% include 'NavBar.html' %}   
     <h1>Crop Selection Sign Up</h1>
     <form name="signup" form action="/signup" method="POST">
       <label for="name">Name:</label>
@@ -113,7 +114,7 @@
         <option value="East">East</option>
         <option value="West">West</option>
       </select>
-      
+      <br></br>
       <label for="season">Growing Season:</label>
       <select id="season" name="season" required>
         <option value="">Select a growing season</option>
@@ -122,8 +123,9 @@
         <option value="Monsoon">Monsoon</option>
       </select>
       
-      <label for="demand">phone:</label>
-      <input type="number" id="demand" name="demand" required>
+      <br></br>
+      <label for="phno">Phone: +91 </label>
+      <input type="number" id="phno" name="phno" required>
       
       <input type="submit" value="Submit">
     </form>
